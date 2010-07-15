@@ -110,7 +110,7 @@ module AuthlogicOpenid
             if !attempted_record
               if auto_register?
                 auto_reg_record = create_open_id_auto_register_record(openid_identifier, registration)
-                if !auto_reg_record.save
+                if !auto_reg_record.save_without_session_maintenance
                   auto_reg_record.errors.each {|attr, msg| errors.add(attr, msg) }
                 else
                   self.attempted_record = auto_reg_record
